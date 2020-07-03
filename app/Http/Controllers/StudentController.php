@@ -15,6 +15,11 @@ class StudentController extends Controller
 
     public function addStudent(Request $request)
     {
+        try {
+            DB::connection()->getPdo();
+        } catch (\Exception $e) {
+            die("Could not connect to the database.  Please check your configuration. error:" . $e );
+        }
        
         $student = new Student;
         $student->salutation = $request->salutation;
